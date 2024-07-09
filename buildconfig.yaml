@@ -1,0 +1,26 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+ name: myapp
+spec:
+ output:
+   to:
+     kind: DockerImage
+     name: 'quay.io/florian_even/my_app:latest'
+   pushSecret:
+     name: florian-even-build-secret
+ strategy:
+   type: Source
+   sourceStrategy:
+     from:
+       kind: DockerImage
+       name: 'registry.access.redhat.com/ubi9/httpd-24:1-325'
+ source:
+   type: Git
+   git:
+     uri: 'git@github.com:neutron-IT-organization/build-config-formation.git'
+   sourceSecret:
+     name: github-deploy-key
+
+
+

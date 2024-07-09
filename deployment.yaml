@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: httpd
+  name: httpd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: httpd
+  template:
+    metadata:
+      labels:
+        deployment: httpd
+    spec:
+      containers:
+      - image: quay.io/florian_even/my_app:latest
+        name: httpd
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 8443
+          protocol: TCP
+      dnsPolicy: ClusterFirst
