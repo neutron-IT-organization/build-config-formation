@@ -1,13 +1,12 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: httpd-route
+  name: httpd-service
+  namespace: florian-ns
 spec:
+  port:
+    targetPort: http
   to:
     kind: Service
     name: httpd-service
-  port:
-    targetPort: 8080
-  tls:
-    termination: edge
-
+    weight: 100
